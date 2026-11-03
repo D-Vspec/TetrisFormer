@@ -98,3 +98,14 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Status: APPROVED
 - Human decision: "K=284, all varying bytes (Recommended)" — 2026-11-03
 - Outcome:
+
+## D-008 — PPO exploration fix: pilot entropy / RND β, then rerun all PoC RL runs with the chosen config
+- Date proposed: 2026-11-03
+- Phase / item: phases/poc.md P5 → "Same policy/PPO/budget as P2"; P2 hand run
+- Checklist says: PPO config as in P2 (entropy 0.01), RND β=0.5.
+- Proposed instead: two 300k-step pilots of the full method: (a) entropy 0.05; (b) entropy 0.05 + β=2. Pick the one that doesn't collapse. Rerun ours / ours_nomask / curiosity (3M steps) **and** the hand baseline with that config, for parity.
+- Reason: `runs/ours` collapsed to "always →" in 150k steps (H-003). Diagnosis: the reward ranking is correct; it's an exploration failure.
+- Downstream impact: the P2 hand run (entropy 0.01, stopped at ~1.1M steps) is superseded; all comparison rows use the new config.
+- Status: APPROVED
+- Human decision: "Pilot fixes, then rerun (Recommended)" — 2026-11-03
+- Outcome:
