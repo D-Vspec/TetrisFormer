@@ -28,7 +28,7 @@ class Policy(nn.Module):
 
 
 def hand_reward(infos):
-    return np.array([1.0 * i["dlines"] + 0.01 for i in infos], dtype=np.float32)
+    return np.array([1.0 * i["dlines"] + 0.1 * i["dpieces"] for i in infos], dtype=np.float32)  # D-006
 
 
 def evaluate(policy, episodes=24, n_envs=12, seed=999):

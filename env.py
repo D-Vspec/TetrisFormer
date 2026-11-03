@@ -25,7 +25,7 @@ class TetrisEnv:
         # timer_div seeds Tetris' piece RNG; random per episode unless given (determinism tests pass it)
         td = int(self.rng.integers(256)) if timer_div is None else timer_div
         self.w.reset_game(timer_div=td)
-        self.t, self.lines = 0, 0
+        self.t, self.lines, self.landed = 0, 0, 0
         return self.ram()
 
     def step(self, a):
@@ -34,8 +34,11 @@ class TetrisEnv:
         self.pb.tick(FRAME_SKIP, False)
         self.t += 1
         lines = self.w.lines
-        info = {"lines": lines, "dlines": lines - self.lines, "score": self.w.score, "t": self.t}
-        self.lines = lines
+        landed = int((np.array(self.pb.tilemap_background[2:12, 0:18]) != 47).sum())  # landed blocks only
+        dlines = lines - self.lines
+        info = {"lines": lines, "dlines": dlines, "score": self.w.score, "t": self.t,
+                "dpieces": int(landed > self.landed)}  # piece locked (lock shows before the line-clear removes rows)
+        self.lines, self.landed = lines, landed
         done = self.w.game_over() or self.t >= MAX_STEPS
         return self.ram(), done, info
 
