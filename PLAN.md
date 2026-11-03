@@ -29,10 +29,16 @@ Framing: *we trade human reward-engineering effort for training-time compute; th
 ### Closest analogue
 - **VIPER** — Escontrela et al., *Video Prediction Models as Rewards for RL*, NeurIPS 2023. Autoregressive transformer trained on expert video; prediction likelihood used as reward. **Our method is VIPER with RAM instead of frames.** Also our main learned-reward baseline.
 
+### Observation-only density rewards (prior art for "likelihood as reward" — D-003)
+- **IL-flOw** — Chang et al., NeurIPS 2021 Robot Learning Workshop (arXiv 2205.09251). Normalizing-flow density over expert state transitions as a stationary reward.
+- **f-IRL** — Ni et al., CoRL 2020. State-marginal matching from expert states.
+- Density-based reward modeling (`imitation` library).
+- **Our novelty is not likelihood-as-reward itself**, but: exact discrete machine state + autoregressive transformer + byte-level interpretability of reward and reward hacking.
+
 ### Transformers / sequence models as reward models
 - **Preference Transformer** — Kim et al., ICLR 2023. Transformer reward model with non-Markovian rewards from human preferences.
 - **RUDDER** — Arjona-Medina et al., NeurIPS 2019. LSTM predicts return; reward redistributed along the sequence.
-- **Reward Bag Transformer** — RL from Bagged Reward, 2024 (arXiv 2402.03771).
+- **Reward Bag Transformer** — RL from Bagged Reward, TMLR 2025 (arXiv 2402.03771).
 - **DTRD** — Zhu et al., IJCAI 2023. Reward redistribution for Decision Transformer under long-delayed rewards.
 
 ### Prediction error as reward (curiosity) — our ablation lineage
@@ -55,7 +61,7 @@ Framing: *we trade human reward-engineering effort for training-time compute; th
 ### LLM / VLM rewards (contrast only)
 - Kwon et al., *Reward Design with Language Models*, ICLR 2023; Motif (ICLR 2024); VLM-RMs (Rocamonde et al., ICLR 2024); Eureka (ICLR 2024).
 
-> TODO: Semantic Scholar sweep for "RAM" + "reward model" + "transformer" before claiming novelty.
+> Phase 0 sweep done 2026-11-03 (`notes/related-work.md`): no RAM-likelihood reward paper found. Re-check before submission (Phase 10).
 
 ## 5. Method
 
