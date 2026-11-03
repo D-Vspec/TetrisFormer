@@ -21,3 +21,4 @@ Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pyto
 {'step': 522240, 'sps': 192, 'rew_mean': 0.00983073003590107, 'ep_lines': 0.04, 'ep_len': 195.66, 'entropy': 0.680010974407196, 'act_hist': [58, 602, 197, 221, 62, 98, 237, 61]}
 {'step': 552960, 'sps': 201, 'rew_mean': 0.009895834140479565, 'ep_lines': 0.0, 'ep_len': 192.46, 'entropy': 0.6504549980163574, 'act_hist': [40, 501, 107, 301, 102, 66, 330, 89]}
 {'step': 583680, 'sps': 209, 'rew_mean': 0.01093750074505806, 'ep_lines': 0.02, 'ep_len': 204.24, 'entropy': 0.6501874923706055, 'act_hist': [20, 689, 126, 233, 27, 17, 308, 116]}
+{'step': 614400, 'sps': 217, 'rew_mean': 0.009440104477107525, 'ep_lines': 0.02, 'ep_len': 192.26, 'entropy': 0.7395724058151245, 'act_hist': [63, 627, 212, 234, 12, 51, 186, 151]}
