@@ -21,8 +21,8 @@ that beats random play. Single seed and rough numbers are fine. Replaces Phases 
 - [x] Hand reward: lines cleared + small survival term (coefficients recorded) — 1.0·Δlines + 0.01/step
 - [x] MLP policy + critic on selected bytes (one-hot), PPO; config logged — `ppo.py`, K=271 policy bytes, `runs/*/config.json`
 - [x] Random-policy reference: lines and episode length — 0.0 lines, 465 steps (48 eps)
-- [~] Train (1 seed, time budget recorded); evaluate vs random — smoke run 400k steps / ~6 min: 0 lines, pause hack (H-001)
-- [ ] **If the agent barely beats random → ask human** (e.g. scripted heuristic expert as data source instead)
+- [x] Train (1 seed, time budget recorded); evaluate vs random — final `runs/hand_final` (300k steps, D-008/D-009 config): 0 lines, 178-step eps vs random 448; earlier runs hacked (H-001, H-002)
+- [x] **If the agent barely beats random → ask human** (e.g. scripted heuristic expert as data source instead) — asked; D-005
 
 ### P3 — Expert data
 - [x] N rollouts of the baseline agent, keep top-k by lines/length (N, k recorded) — replaced by scripted expert (D-005): N=k=100 episodes, all kept; `notes/scripted-expert.md`
@@ -40,13 +40,13 @@ that beats random play. Single seed and rough numbers are fine. Replaces Phases 
 ### P5 — RL on the learned reward
 - [x] r = Σ log p over unmasked bytes, running normalization, + β·RND bonus (D-002 candidate d) — `rl.py`, β=0.5 on normalized scale; done-transitions get r=0; history padded with first state
 - [x] Same policy/PPO/budget as P2; only the reward differs — `rl.py` calls `ppo.train` unchanged, 3M steps; RM checksum asserted unchanged after run
-- [ ] Runs (1 seed each): full method; no mask; curiosity (−log p)
-- [ ] Failure modes / hacks noted with responsible addresses (`notes/reward-hacking.md`)
+- [x] Runs (1 seed each): full method; no mask; curiosity (−log p) — `runs/pilot_a` (= ours), `runs/ours_nomask`, `runs/curiosity`, 300k steps (D-009)
+- [x] Failure modes / hacks noted with responsible addresses (`notes/reward-hacking.md`) — H-001…H-004; addresses in RESULTS.md
 
 ### P6 — Report
-- [ ] Table: random, hand-engineered, ours, ours-no-mask, curiosity → lines, episode length
-- [ ] Top reward-driving addresses (simple per-address log p contribution)
-- [ ] `RESULTS.md` with honest caveats (circular data, 1 seed, Tetris instead of SML)
+- [x] Table: random, hand-engineered, ours, ours-no-mask, curiosity → lines, episode length — RESULTS.md
+- [x] Top reward-driving addresses (simple per-address log p contribution) — `runs/analysis.json`, RESULTS.md
+- [x] `RESULTS.md` with honest caveats (circular data, 1 seed, Tetris instead of SML)
 
 ## Exit gate (human sign-off)
 - [ ] RESULTS.md reviewed by human

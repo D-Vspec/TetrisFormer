@@ -1,0 +1,14 @@
+UserWarning: Using SDL2 binaries from pysdl2-dll 2.32.10
+/home/dv/Documents/Programming/Projects/MarioFormer/ppo.py:104: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  "entropy": float(dist.entropy().mean()),
+{'step': 30720, 'sps': 1073, 'rew_mean': 0.0043619791977107525, 'ep_lines': 0.0, 'ep_len': 550.5, 'entropy': 1.6130101680755615, 'act_hist': [120, 188, 135, 290, 172, 272, 81, 278]}
+{'step': 61440, 'sps': 1069, 'rew_mean': 0.00559895858168602, 'ep_lines': 0.02, 'ep_len': 259.72, 'entropy': 1.5530660152435303, 'act_hist': [253, 198, 105, 488, 120, 232, 91, 49]}
+{'step': 92160, 'sps': 1060, 'rew_mean': 0.0061848959885537624, 'ep_lines': 0.0, 'ep_len': 219.68, 'entropy': 1.5879740715026855, 'act_hist': [124, 267, 75, 367, 94, 277, 165, 167]}
+{'step': 122880, 'sps': 1057, 'rew_mean': 0.0063151041977107525, 'ep_lines': 0.02, 'ep_len': 202.48, 'entropy': 1.5891833305358887, 'act_hist': [122, 346, 101, 400, 128, 276, 32, 131]}
+{'step': 153600, 'sps': 1055, 'rew_mean': 0.00813802145421505, 'ep_lines': 0.0, 'ep_len': 180.56, 'entropy': 1.5411036014556885, 'act_hist': [168, 602, 118, 307, 170, 87, 13, 71]}
+{'step': 184320, 'sps': 1053, 'rew_mean': 0.008203125558793545, 'ep_lines': 0.0, 'ep_len': 155.86, 'entropy': 1.5277223587036133, 'act_hist': [162, 608, 133, 237, 65, 131, 63, 137]}
+{'step': 215040, 'sps': 1052, 'rew_mean': 0.006054687779396772, 'ep_lines': 0.0, 'ep_len': 180.14, 'entropy': 1.6632747650146484, 'act_hist': [133, 397, 124, 259, 198, 175, 82, 168]}
+{'step': 245760, 'sps': 1052, 'rew_mean': 0.0064453124068677425, 'ep_lines': 0.0, 'ep_len': 219.06, 'entropy': 1.656670093536377, 'act_hist': [139, 281, 229, 110, 269, 134, 170, 204]}
+{'step': 276480, 'sps': 1052, 'rew_mean': 0.0061848959885537624, 'ep_lines': 0.04, 'ep_len': 200.52, 'entropy': 1.669031023979187, 'act_hist': [207, 337, 250, 148, 231, 80, 109, 174]}
+eval {'lines': 0.0, 'len': 178.45833333333334, 'episodes': 24}

@@ -47,3 +47,9 @@ Entries before 2026-11-03 ~17:00 were reconstructed from the session after the h
 - **Noteworthy:** pilot_a's median step is about as likely as an expert step. The policy is expert-like most of the time and loses reward on rare, very unlikely steps.
 - **Slowdown:** parallel ours_nomask + curiosity slowed from 143 to ~95 steps/s each as training went on (190 combined); still faster than sequential.
 - **Curiosity finding:** by 50k steps the curiosity run presses Start on ~92–99% of steps (entropy 0.04–0.2), raw log p ≈ −250/step. It pauses the game because pause screens are maximally surprising (never in expert data): the RAM version of the noisy-TV failure. Mirror image of the likelihood reward, which scores pausing worst.
+- **Correction:** I told the human the policy is ~17.4M params; it's 17,828,361 (input EmbeddingBag 271×256×256 = 17.76M).
+- **Final runs done:** ours_nomask eval eps 822 steps vs ~176 in training. Its policy presses ← 76% (no pausing: Start 0%), so pieces pile on the left. Unexplained why that lasts longer than "always →" (~215).
+- **Curiosity** cleared 1 line in 24 eval games (0.04/game). Treated as noise.
+- **Expert median log p** is −5.1/step (mean −13.8): expert per-step reward is heavy-tailed too.
+- **Unidentified address:** 0xC203 is the top gap byte for ours and hand; meaning unknown.
+- **RESULTS.md written**; all PoC checklist items ticked except the human-review gate.

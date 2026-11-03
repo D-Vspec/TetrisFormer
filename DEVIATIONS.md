@@ -75,7 +75,7 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Downstream impact: expert data is no longer from a reward-trained agent (less circular than D-001); the expert does read game state, so it is still "engineered knowledge"; RESULTS.md must say so.
 - Status: APPROVED
 - Human decision: "Do the scripted expert but do a write-up on it" — 2026-11-03
-- Outcome:
+- Outcome: expert ran 100 games, 53.3 lines/game; write-up done.
 
 ## D-006 — Hand-engineered reward: drop survival term, add per-piece bonus
 - Date proposed: 2026-11-03
@@ -86,7 +86,7 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Downstream impact: hand-engineered comparison row only.
 - Status: APPROVED
 - Human decision: "Lines + per-piece bonus (Recommended)" — 2026-11-03
-- Outcome:
+- Outcome: reward v2 was exploited via the pause overlay (H-002, detector bug, fixed); final hand run 0 lines.
 
 ## D-007 — Reward-model K=284 (all varying bytes) instead of K=128
 - Date proposed: 2026-11-03
@@ -97,7 +97,7 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Downstream impact: 2,272 tokens per T=8 window; slower reward inference.
 - Status: APPROVED
 - Human decision: "K=284, all varying bytes (Recommended)" — 2026-11-03
-- Outcome:
+- Outcome: K=289 over all 100 episodes (284 was on 30).
 
 ## D-008 — PPO exploration fix: pilot entropy / RND β, then rerun all PoC RL runs with the chosen config
 - Date proposed: 2026-11-03
@@ -119,4 +119,4 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Downstream impact: 10× less training than planned. Results show early learning trends only; lines cleared will likely be ~0 for all.
 - Status: APPROVED
 - Human decision: "Do enough to get a proof of concept report in a couple hours" — 2026-11-03
-- Outcome:
+- Outcome: all runs done; every agent ~0 lines; see RESULTS.md.

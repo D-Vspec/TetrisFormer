@@ -24,3 +24,4 @@
 - Behavior: presses Start on ~99% of steps by 150k steps; 0 lines; ~360–470-step episodes (pausing slows the game).
 - Why: under −log p the pause overlay (44 tiles over the board, never in expert data) is the most surprising state the agent can produce (~−250 log p/step) → noisy-TV-style exploit.
 - Addresses: TODO from analyze.py top_addresses.
+- H-003/H-004 addresses (from analyze.py, masked RM gaps vs expert): ours → 0xC203, 0xC010–0xC01D (piece sprites); curiosity → 0xC014/0xC018/0xC010 sprites, 0xC210, 0xCFF1.

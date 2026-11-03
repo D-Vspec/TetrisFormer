@@ -1,0 +1,15 @@
+{
+ "name": "hand_final",
+ "steps": 300000,
+ "envs": 12,
+ "rollout": 128,
+ "lr": 0.00025,
+ "gamma": 0.99,
+ "lam": 0.95,
+ "clip": 0.2,
+ "epochs": 4,
+ "minibatches": 8,
+ "ent": 0.05,
+ "seed": 0,
+ "commit": "d75aa85"
+}

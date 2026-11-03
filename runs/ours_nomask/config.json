@@ -1,0 +1,18 @@
+{
+ "name": "ours_nomask",
+ "steps": 300000,
+ "envs": 12,
+ "rollout": 128,
+ "lr": 0.00025,
+ "gamma": 0.99,
+ "lam": 0.95,
+ "clip": 0.2,
+ "epochs": 4,
+ "minibatches": 8,
+ "ent": 0.05,
+ "seed": 0,
+ "rm": "runs/rm_nomask/model.pt",
+ "curiosity": false,
+ "beta": 0.5,
+ "commit": "8ab774f"
+}
