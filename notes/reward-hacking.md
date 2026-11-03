@@ -12,3 +12,9 @@
 - Evidence: test toggling Start: landed 16 → 44 → 16 → 44; dpieces fired on every second toggle.
 - Root cause: my piece-lock detector, not the game. Fix: count a lock only when the landed count rises by exactly 4. Re-verified: 34 pieces, board count matches exactly, pause toggles count 0.
 - Note: both hand-reward hacks go through **Start**. That supports the PoC story: hand rewards get hacked in ways that need RAM/screen-level debugging.
+
+## H-003 — Collapse to "always →" (learned likelihood reward)
+- Run: `runs/ours` (stopped at ~152k steps), r = norm(Σ log p) + 0.5·norm(RND)
+- Behavior: presses → on 100% of steps, entropy 1.7e-5, 0 lines, ~200-step episodes.
+- Diagnosis: not reward hacking in the "exploit" sense. Under the learned reward "always →" (−34.5/step) beats every other trivial policy (no-op −41…−52, ← −45, ↓ −46, random −121, Start −257), but scores far below the expert (−12.4). Local optimum from weak exploration; the reward ordering is correct.
+- Addresses: TODO (per-address gap analysis, P6).
