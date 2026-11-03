@@ -6,7 +6,12 @@
 ## Checklist
 
 ### Source decision
-- [ ] **Ask human:** TAS, human recordings, or both (open decision §10) — record answer
+- [ ] **Ask human:** source mix of TAS / human recordings / oracle-agent rollouts (open decision §10; oracle option added by D-001) — record answer
+- [ ] Note: oracle data is circular w.r.t. claim 1 (reward model learns the hand-rewarded agent) — TAS/human must remain the headline source
+
+### Oracle-agent path (D-001, VIPER protocol)
+- [ ] Roll out the Phase 2 hand-engineered agent for N episodes (VIPER: 1000), keep top-k by progress (VIPER: k=100); N, k recorded
+- [ ] Traces extracted with the same procedure as below; source tagged `oracle` in metadata
 
 ### TAS path
 - [ ] List glitchless-category TASVideos runs for SML (and Pokémon Red for later): URL, category, emulator, ROM revision, movie format

@@ -89,6 +89,7 @@ The policy is (near-)Markov in RAM; the reward is history-conditioned.
 - **Source options:**
   - **TAS** (TASVideos): input files replay deterministically → exact RAM traces for free. Use **glitchless categories only** — TAS runs exploit glitches, RNG manipulation, wrong-warps, ACE, which would teach the reward model unreachable states.
   - **Human recordings**: more representative of reachable competent play; scarcer.
+  - **Oracle-agent rollouts** (D-001): top-k episodes of the hand-engineered baseline agent, as in VIPER. Plentiful, but circular w.r.t. claim 1 — supplementary source, not the headline. (One SML TAS ≈ 1.8k agent steps vs ~400k target.)
 - **Pipeline:** replay inputs in PyBoy → snapshot RAM every agent step (e.g. every ~24 frames) → store `[episode, step, K]` uint8 arrays.
 - **Actions are discarded** — the reward model is action-free.
 - **Rough data target:** ~20 tokens/param → ~100M tokens for a 5M model (~25k windows of 16 steps).

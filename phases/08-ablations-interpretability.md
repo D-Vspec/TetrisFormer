@@ -12,7 +12,7 @@
 - [ ] Tokenization A (one token per step) vs B vs C (diff tokens) — implement A and C here
 - [ ] Context length T (e.g. 4 / 8 / 16)
 - [ ] Model size (1M / 5M / 25M)
-- [ ] TAS vs human data (only if both exist)
+- [ ] TAS vs human vs oracle-agent data (only sources that exist; D-001)
 - [ ] Likelihood vs curiosity sign (reuse Phase 6 runs if protocol identical)
 - [ ] Ablation table + plots saved
 
