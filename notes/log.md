@@ -53,3 +53,4 @@ Entries before 2026-11-03 ~17:00 were reconstructed from the session after the h
 - **Expert median log p** is −5.1/step (mean −13.8): expert per-step reward is heavy-tailed too.
 - **Unidentified address:** 0xC203 is the top gap byte for ours and hand; meaning unknown.
 - **RESULTS.md written**; all PoC checklist items ticked except the human-review gate.
+- **GIF:** runs/tetris_agents.gif (200 agent steps, timer_div=42, captured every 8 frames, real-time). In it, ours tops out early (fast ↓ drops) and curiosity sits on the pause screen.
