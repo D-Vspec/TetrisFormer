@@ -1,0 +1,15 @@
+{
+ "rule": "noop change rate >= 0.6",
+ "episodes": 10,
+ "n_masked": 8,
+ "addresses": [
+  "0xcfed",
+  "0xdf94",
+  "0xdf99",
+  "0xdfa2",
+  "0xdfa4",
+  "0xdfa9",
+  "0xdfb4",
+  "0xdfc4"
+ ]
+}

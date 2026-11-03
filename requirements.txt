@@ -1,0 +1,4 @@
+pyboy==2.9.0
+torch==2.14.0
+numpy==2.5.4
+# python 3.14.2 (system), venv: uv venv --system-site-packages --python /usr/bin/python3 .venv
