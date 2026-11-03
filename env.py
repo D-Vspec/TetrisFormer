@@ -37,7 +37,7 @@ class TetrisEnv:
         landed = int((np.array(self.pb.tilemap_background[2:12, 0:18]) != 47).sum())  # landed blocks only
         dlines = lines - self.lines
         info = {"lines": lines, "dlines": dlines, "score": self.w.score, "t": self.t,
-                "dpieces": int(landed > self.landed)}  # piece locked (lock shows before the line-clear removes rows)
+                "dpieces": int(landed - self.landed == 4)}  # lock = exactly +4 cells (pause overlay adds 28: H-002)
         self.lines, self.landed = lines, landed
         done = self.w.game_over() or self.t >= MAX_STEPS
         return self.ram(), done, info
