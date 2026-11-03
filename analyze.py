@@ -6,7 +6,7 @@ from env import TetrisEnv
 from ppo import DEV, Policy, policy_addresses
 from rm import RewardModel, load
 
-RUNS = ["hand", "ours", "ours_nomask", "curiosity"]
+RUNS = ["hand_final", "pilot_a", "ours_nomask", "curiosity"]  # pilot_a = "ours" (D-009)
 
 
 def agent_traces(run, episodes=4):
