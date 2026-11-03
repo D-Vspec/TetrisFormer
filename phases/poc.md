@@ -35,11 +35,11 @@ that beats random play. Single seed and rough numbers are fine. Replaces Phases 
 - [x] Overfit-one-batch check — 5.88 → 0.03 nats/byte in 300 its
 - [x] Val NLL vs copy-last-state baseline — 0.040 vs copy 0.505 (ε=change rate 0.053) vs unigram 0.715; `runs/rm/eval.json`
 - [x] Likelihood ordering: expert val > random play — NLL 0.040 expert vs 0.417 random
-- [ ] Batched reward inference speed recorded
+- [x] Batched reward inference speed recorded — ~300 windows/s (T·K=2312 tokens), compute-bound (batch 12→192 no gain; SDPA rewrite no gain); 48 ms/step for 12 envs (+8 ms RND) → RL ≈ 200 steps/s ≈ 4 h per 3M-step run
 
 ### P5 — RL on the learned reward
-- [ ] r = Σ log p over unmasked bytes, running normalization, + β·RND bonus (D-002 candidate d)
-- [ ] Same policy/PPO/budget as P2; only the reward differs
+- [x] r = Σ log p over unmasked bytes, running normalization, + β·RND bonus (D-002 candidate d) — `rl.py`, β=0.5 on normalized scale; done-transitions get r=0; history padded with first state
+- [x] Same policy/PPO/budget as P2; only the reward differs — `rl.py` calls `ppo.train` unchanged, 3M steps; RM checksum asserted unchanged after run
 - [ ] Runs (1 seed each): full method; no mask; curiosity (−log p)
 - [ ] Failure modes / hacks noted with responsible addresses (`notes/reward-hacking.md`)
 
@@ -53,3 +53,4 @@ that beats random play. Single seed and rough numbers are fine. Replaces Phases 
 
 ## Notes / decisions
 - P1 mask rule: no byte changes on ≥95% of steps at 24-frame sampling (frame counter / RNG live in HRAM/IO, not WRAM). Used **no-op change rate ≥ 0.6** instead → 7 sound-driver bytes (0xDF94–0xDFC4) + stack byte 0xCFED. Random-play rates not thresholded because Start pauses Tetris and halves the rates. Only 278/8192 WRAM bytes ever change in play.
+- P5: curiosity run keeps the RND bonus (β=0.5) so it differs from "ours" only in the sign of log p.
