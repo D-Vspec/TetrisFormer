@@ -2,3 +2,11 @@ UserWarning: Using SDL2 binaries from pysdl2-dll 2.32.10
 /home/dv/Documents/Programming/Projects/MarioFormer/ppo.py:104: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
 Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
   "entropy": float(dist.entropy().mean()),
+{'step': 30720, 'sps': 107, 'rew_mean': -0.20178012549877167, 'ep_lines': 0.0, 'ep_len': 278.94, 'entropy': 0.006435349117964506, 'act_hist': [10, 0, 0, 1526, 0, 0, 0, 0], 'raw_logp': -39.104427337646484}
+{'step': 61440, 'sps': 107, 'rew_mean': -0.1996518075466156, 'ep_lines': 0.0, 'ep_len': 202.22, 'entropy': 0.0009209310519509017, 'act_hist': [0, 0, 0, 1536, 0, 0, 0, 0], 'raw_logp': -42.37799072265625}
+{'step': 92160, 'sps': 107, 'rew_mean': -0.2035379707813263, 'ep_lines': 0.0, 'ep_len': 197.04, 'entropy': 2.753044782366487e-06, 'act_hist': [0, 0, 0, 1536, 0, 0, 0, 0], 'raw_logp': -44.400245666503906}
+{'step': 122880, 'sps': 107, 'rew_mean': -0.1982031911611557, 'ep_lines': 0.0, 'ep_len': 202.12, 'entropy': 6.0760150518035516e-05, 'act_hist': [0, 0, 0, 1536, 0, 0, 0, 0], 'raw_logp': -49.404212951660156}
+{'step': 153600, 'sps': 108, 'rew_mean': -0.19292551279067993, 'ep_lines': 0.0, 'ep_len': 198.36, 'entropy': 9.085513738682494e-05, 'act_hist': [0, 0, 0, 1536, 0, 0, 0, 0], 'raw_logp': -44.80322265625}
+{'step': 184320, 'sps': 108, 'rew_mean': -0.17268654704093933, 'ep_lines': 0.0, 'ep_len': 200.86, 'entropy': 3.8906098779989406e-05, 'act_hist': [0, 0, 0, 1536, 0, 0, 0, 0], 'raw_logp': -41.65500259399414}
+{'step': 215040, 'sps': 108, 'rew_mean': -0.1452394425868988, 'ep_lines': 0.0, 'ep_len': 197.38, 'entropy': 0.00011880652164109051, 'act_hist': [0, 0, 0, 1536, 0, 0, 0, 0], 'raw_logp': -38.210121154785156}
+{'step': 245760, 'sps': 108, 'rew_mean': -0.16835074126720428, 'ep_lines': 0.0, 'ep_len': 204.4, 'entropy': 0.00012539896124508232, 'act_hist': [0, 0, 0, 1536, 0, 0, 0, 0], 'raw_logp': -46.3399658203125}

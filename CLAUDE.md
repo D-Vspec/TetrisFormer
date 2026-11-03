@@ -23,8 +23,11 @@ Full plan: `PLAN.md`. Work is driven by the phase checklists in `phases/`.
    with a note.
 6. **One phase at a time.** Work the lowest-numbered phase whose exit gate is not passed. Gates are
    checked by the human, not self-certified: report gate status and ask for sign-off.
-7. **Open decisions** (PLAN.md §10) are the human's. Present options + a recommendation; don't pick.
-8. If the checklist turns out wrong, impossible, or contradicts `PLAN.md`, that is a deviation: stop,
+7. **Log every small discrepancy or noteworthy event** in `notes/log.md`, as it happens: surprises, workarounds,
+   bugs, numbers that differ from expectations, ops mistakes, killed/restarted runs, decisions made inside an item.
+   One short line each, newest at the bottom. (Human request, 2026-11-03.)
+8. **Open decisions** (PLAN.md §10) are the human's. Present options + a recommendation; don't pick.
+9. If the checklist turns out wrong, impossible, or contradicts `PLAN.md`, that is a deviation: stop,
    explain, log, ask.
 
 ### Phase index
