@@ -54,3 +54,14 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Status: APPROVED
 - Human decision: "Proceed + approve D-003 (Recommended)" — 2026-11-03 (selected answer to Phase 0 question)
 - Outcome:
+
+## D-004 — Compress project to a ~2-day proof of concept
+- Date proposed: 2026-11-03 (requested by human)
+- Phase / item: phases/00 → proposed 26-week timeline; all of Phases 1–10
+- Checklist says: 10 sequential phases toward NeurIPS 2027 (2027-05-03).
+- Proposed instead: PoC in ~2 days. Exact scope (game, phases kept/cut, data source) pending human answer below.
+- Reason: human: "Change in timeline, I need it done in a couple days (doesn't have to be perfect just something as a Poc)"
+- Downstream impact: most of Phases 6–10 cut; multi-seed, ablations, VIPER, and extra games likely dropped; PoC results not paper-grade. Constraint found: no Super Mario Land ROM on this machine (only Tetris and Pokémon Yellow in ~/Documents/Programming/Projects/dvBoyC/roms/).
+- Status: PROPOSED (timeline change requested by human; scope awaiting approval)
+- Human decision: "Change in timeline, I need it done in a couple days (doesn't have to be perfect just something as a Poc)" — 2026-11-03
+- Outcome:
