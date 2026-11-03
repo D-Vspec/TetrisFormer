@@ -6,3 +6,4 @@ checkpoints/
 data/
 __pycache__/
 .venv/
+runs/*/policy.pt
