@@ -1,6 +1,11 @@
 # Learning Rewards from Machine State: A Proof of Concept on Game Boy Tetris
 
-**Author:** D-VSpec · **Date:** November 2026 · **Code:** https://github.com/D-Vspec/TetrisFormer
+**Authors:**\
+23BDS0183 Divyansh Verma\
+23BDS0251 Aishwarya Sanjay Krishna\
+23BDS0249 Pranshu Ranjan
+
+**Date:** November 2026 · **Code:** https://github.com/D-Vspec/TetrisFormer
 
 ---
 
