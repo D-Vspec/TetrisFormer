@@ -401,22 +401,3 @@ Next steps, in order of expected value:
 - Lee, Y. *Tetris AI – The (Near) Perfect Bot* (heuristic weights), 2013.
 
 Full bibliography: `notes/refs.bib`.
-
-## Appendix A — Reproducibility
-Commands are in `README.md`. A legally obtained Tetris ROM is required (SHA-1 in `notes/roms.md`; not
-included). Reward-model checkpoints are in `runs/rm*/model.pt`; policy checkpoints (71 MB each) are not in the
-repository. Every run's config, git commit and per-update log are in `runs/<name>/`.
-
-## Appendix B — Approved deviations from the plan
-
-| ID | Change |
-|---|---|
-| D-001 | Allow oracle-agent rollouts as a data source |
-| D-002 | Add VIPER-style RND bonus; faithful VIPER baseline |
-| D-003 | Narrow novelty framing (IL-flOw prior art) |
-| D-004 | Compress to a 2-day Tetris PoC |
-| D-005 | Scripted expert replaces PPO-oracle data |
-| D-006 | Hand reward: drop survival term, add per-piece bonus |
-| D-007 | Reward-model address set K = 289 (all varying bytes) instead of 128 |
-| D-008 | Entropy coefficient 0.05 (chosen by pilot), applied to all runs |
-| D-009 | 300k RL steps per run instead of 3M |
