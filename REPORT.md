@@ -309,8 +309,8 @@ model, determines this behaviour.
 
 ![Expert | ours | curiosity](runs/tetris_agents.gif)
 
-*Figure 2. Same piece sequence. Left: scripted expert. Middle: our agent (drops pieces fast and tops out).
-Right: curiosity agent (paused).*
+*Figure 2. Same piece sequence. Left: scripted expert (flat, low stack). Middle: our agent (drops pieces fast,
+leaving a ragged stack full of holes; it tops out soon after). Right: curiosity agent (paused).*
 
 ---
 
