@@ -37,3 +37,4 @@ Entries before 2026-11-03 ~17:00 were reconstructed from the session after the h
 - **Noteworthy:** the first 8 steps (history padded with s0) score about the same as later steps. Padding isn't a problem.
 - **Stopped** `runs/hand` (entropy 0.01) at 1.58M steps (0.02 lines/ep, ~228-step episodes), to be superseded by the D-008 parity rerun. Its partial log is kept.
 - **Correction:** I first logged the hand-run stop at ~1.1M steps; the final log line shows 1,579,008. Fixed above and in D-008.
+- **Throughput discrepancy:** learned-reward PPO runs at ~126 steps/s end to end (pilot_a, nothing else running), not the ~200 estimated from reward-fn profiling (PPO update + env overhead on top). 3M-step run ≈ 6.6 h, not 4 h; 3 runs sequential ≈ 20 h.
