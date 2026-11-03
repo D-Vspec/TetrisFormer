@@ -18,3 +18,9 @@
 - Behavior: presses → on 100% of steps, entropy 1.7e-5, 0 lines, ~200-step episodes.
 - Diagnosis: not reward hacking in the "exploit" sense. Under the learned reward "always →" (−34.5/step) beats every other trivial policy (no-op −41…−52, ← −45, ↓ −46, random −121, Start −257), but scores far below the expert (−12.4). Local optimum from weak exploration; the reward ordering is correct.
 - Addresses: TODO (per-address gap analysis, P6).
+
+## H-004 — Curiosity agent pauses (−log p reward)
+- Run: `runs/curiosity` (300k steps, D-008 config, β=0.5 RND kept)
+- Behavior: presses Start on ~99% of steps by 150k steps; 0 lines; ~360–470-step episodes (pausing slows the game).
+- Why: under −log p the pause overlay (44 tiles over the board, never in expert data) is the most surprising state the agent can produce (~−250 log p/step) → noisy-TV-style exploit.
+- Addresses: TODO from analyze.py top_addresses.
