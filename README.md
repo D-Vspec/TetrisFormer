@@ -23,7 +23,8 @@ Right: "curiosity" agent, the same reward model with the sign flipped. Same piec
 | Interpretability | Each failure maps to a few RAM addresses (falling-piece sprites, sound driver, stack) |
 | Playing Tetris | ❌ No agent clears lines yet (300k steps, 1 seed). Button-level PPO is the bottleneck |
 
-Full write-up with caveats: **[`RESULTS.md`](RESULTS.md)**.
+**Report** (problem statement, work done, implementation, results, discussion): **[`REPORT.md`](REPORT.md)**.
+Short results summary with caveats: [`RESULTS.md`](RESULTS.md).
 
 ## How it works
 
