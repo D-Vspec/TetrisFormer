@@ -83,4 +83,17 @@ Venue confirmed via NeurIPS 2023 poster page + mlanthology. (danijar.com says "N
 | STORM — Zhang et al., NeurIPS 2023 | ✔ verified |
 | Rank-Then-Act — arXiv 2607.01897, ICML 2026 workshop | ✔ verified (arXiv + repo) |
 | PokeRL — arXiv 2604.10812 | ✔ verified (arXiv) |
-| Preference Transformer, RUDDER, Reward Bag Transformer, DTRD, ICM, AtariARI, OCAtari, Kwon et al., Motif, VLM-RMs, Eureka | ☐ not yet verified |
+| Preference Transformer — ICLR 2023 | ✔ verified |
+| RUDDER — NeurIPS 2019 | ✔ verified |
+| Reward Bag Transformer — **TMLR 2025** (arXiv 2402.03771); an ICML 2026 poster with same title also exists | ✔ verified — PLAN.md says "2024" |
+| DTRD — Zhu et al., IJCAI 2023 | ✔ verified |
+| ICM — Pathak et al., ICML 2017 | ✔ verified |
+| AtariARI — Anand et al., NeurIPS 2019 | ✔ verified |
+| OCAtari — Delfosse et al., RLJ vol. 1, 2024 (RLC 2024) | ✔ verified |
+| Kwon et al. — ICLR 2023 | ✔ verified |
+| Motif — Klissarov et al., ICLR 2024 | ✔ verified |
+| VLM-RMs — Rocamonde et al., ICLR 2024 | ✔ verified |
+| Eureka — ICLR 2024 | ✔ verified |
+| Schmidhuber 1990/1991 | ☐ not verified (classic; low risk) |
+
+BibTeX: `notes/refs.bib`.
