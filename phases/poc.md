@@ -25,16 +25,16 @@ that beats random play. Single seed and rough numbers are fine. Replaces Phases 
 - [ ] **If the agent barely beats random → ask human** (e.g. scripted heuristic expert as data source instead)
 
 ### P3 — Expert data
-- [ ] N rollouts of the baseline agent, keep top-k by lines/length (N, k recorded)
-- [ ] Store `[episode, step, 8192]` uint8; train/val split by episode
-- [ ] Address selection: bytes that vary in expert data minus volatile mask → K=128 (rule + list saved)
-- [ ] Data volume recorded (steps, tokens)
+- [x] N rollouts of the baseline agent, keep top-k by lines/length (N, k recorded) — replaced by scripted expert (D-005): N=k=100 episodes, all kept; `notes/scripted-expert.md`
+- [x] Store `[episode, step, 8192]` uint8; train/val split by episode — npz per episode; val = every 10th episode (10), train = 90; + 20 random-play episodes
+- [x] Address selection: bytes that vary in expert data minus volatile mask → K=128 (rule + list saved) — K=289 (D-007), `notes/rm_addresses.json`
+- [x] Data volume recorded (steps, tokens) — 183,044 expert steps ≈ 52.9M tokens
 
 ### P4 — Reward model
-- [ ] Option B tokens (value + address + time emb), T=8, K=128, ~1M params, causal; volatile bytes excluded from the loss
-- [ ] Overfit-one-batch check
-- [ ] Val NLL vs copy-last-state baseline
-- [ ] Likelihood ordering: expert val > random play
+- [x] Option B tokens (value + address + time emb), T=8, K=128, ~1M params, causal; volatile bytes excluded from the loss — `rm.py`, d=128 4L 4H, 0.90M params, block-causal, K=289 (D-007)
+- [x] Overfit-one-batch check — 5.88 → 0.03 nats/byte in 300 its
+- [x] Val NLL vs copy-last-state baseline — 0.040 vs copy 0.505 (ε=change rate 0.053) vs unigram 0.715; `runs/rm/eval.json`
+- [x] Likelihood ordering: expert val > random play — NLL 0.040 expert vs 0.417 random
 - [ ] Batched reward inference speed recorded
 
 ### P5 — RL on the learned reward
