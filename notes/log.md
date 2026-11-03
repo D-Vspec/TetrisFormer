@@ -35,4 +35,5 @@ Entries before 2026-11-03 ~17:00 were reconstructed from the session after the h
 - **Noteworthy:** pausing is the *worst* behaviour under the learned reward (−257/step, never seen in expert data), so the Start exploit behind H-001/H-002 doesn't transfer to the learned reward.
 - **Noteworthy:** random play scores worse than any fixed action (−121), mostly because random presses Start ~1/8 of the time.
 - **Noteworthy:** the first 8 steps (history padded with s0) score about the same as later steps. Padding isn't a problem.
-- **Stopped** `runs/hand` (entropy 0.01) at ~1.1M steps, to be superseded by the D-008 parity rerun. Its partial log is kept.
+- **Stopped** `runs/hand` (entropy 0.01) at 1.58M steps (0.02 lines/ep, ~228-step episodes), to be superseded by the D-008 parity rerun. Its partial log is kept.
+- **Correction:** I first logged the hand-run stop at ~1.1M steps; the final log line shows 1,579,008. Fixed above and in D-008.
