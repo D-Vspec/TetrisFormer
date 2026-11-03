@@ -65,3 +65,25 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Status: APPROVED
 - Human decision: "Change in timeline, I need it done in a couple days (doesn't have to be perfect just something as a Poc)" — 2026-11-03; game: "Tetris (available now)"; scope: "Approve as proposed (Recommended)" — 2026-11-03
 - Outcome:
+
+## D-005 — Scripted heuristic expert replaces PPO-oracle data (PoC)
+- Date proposed: 2026-11-03
+- Phase / item: phases/poc.md P3 → "N rollouts of the baseline agent, keep top-k"; P2 branch "If the agent barely beats random → ask human"
+- Checklist says: expert data = top-k rollouts of the P2 hand-engineered PPO agent (D-001).
+- Proposed instead: a scripted Tetris placement heuristic (holes / height / bumpiness / lines) that reads the board from the emulator and presses buttons through the same env (same 24-frame step, same RAM sampling). Plus a short write-up of the expert (`notes/scripted-expert.md`).
+- Reason: smoke run (`runs/smoke_hand`) cleared 0 lines and learned to pause (H-001); data from it would not be competent play.
+- Downstream impact: expert data is no longer from a reward-trained agent (less circular than D-001); the expert does read game state, so it is still "engineered knowledge"; RESULTS.md must say so.
+- Status: APPROVED
+- Human decision: "Do the scripted expert but do a write-up on it" — 2026-11-03
+- Outcome:
+
+## D-006 — Hand-engineered reward: drop survival term, add per-piece bonus
+- Date proposed: 2026-11-03
+- Phase / item: phases/poc.md P2 → "Hand reward: lines cleared + small survival term"
+- Checklist says: lines + small survival term.
+- Proposed instead: 1.0·Δlines + 0.1 per piece locked; no per-step term.
+- Reason: the survival term was farmed by pausing (H-001).
+- Downstream impact: hand-engineered comparison row only.
+- Status: APPROVED
+- Human decision: "Lines + per-piece bonus (Recommended)" — 2026-11-03
+- Outcome:
