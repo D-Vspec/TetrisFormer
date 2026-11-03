@@ -87,3 +87,14 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Status: APPROVED
 - Human decision: "Lines + per-piece bonus (Recommended)" — 2026-11-03
 - Outcome:
+
+## D-007 — Reward-model K=284 (all varying bytes) instead of K=128
+- Date proposed: 2026-11-03
+- Phase / item: phases/poc.md P3/P4 → "K=128"
+- Checklist says: K=128.
+- Proposed instead: K=284 = every byte that varies in expert data, minus the volatile mask.
+- Reason: 180 of the 284 varying bytes are the 18×10 playfield copy at 0xC800–0xCA3F; K=128 cannot hold the board.
+- Downstream impact: 2,272 tokens per T=8 window; slower reward inference.
+- Status: APPROVED
+- Human decision: "K=284, all varying bytes (Recommended)" — 2026-11-03
+- Outcome:
