@@ -29,8 +29,8 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Proposed instead: add a third option — top-k episodes from the Phase 2 hand-engineered agent (VIPER's protocol: top-100 of 1000 rollouts per Atari game).
 - Reason: one SML TAS ≈ 1.8k agent steps vs ~400k target (~200× short); SML TAS uses a screen-warp trick (may not be glitchless). VIPER did not use human/TAS data at all.
 - Downstream impact: weakens claim 1 if the *only* data comes from a hand-rewarded agent (the reward model would learn the engineered reward's behavior — circular). Would need to be framed as "same data protocol as VIPER", with TAS/human as the non-circular variant. Affects Phases 3, 8 (TAS vs human vs oracle ablation), 10.
-- Status: PROPOSED
-- Human decision:
+- Status: APPROVED
+- Human decision: "Allow as extra source (Recommended)" — 2026-11-03 (selected answer to Phase 0 question)
 - Outcome:
 
 ## D-002 — VIPER exploration term: add as progress-term candidate and include in VIPER baseline
@@ -40,8 +40,8 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Proposed instead: (1) add candidate (d): VIPER-style exploration bonus (RND) on RAM; (2) state explicitly that the VIPER baseline uses r = log p + β·r_expl.
 - Reason: VIPER Eq. 6 makes the exploration/entropy term part of the method, derived from KL matching; it exists to fix the same "most-likely ≠ typical / idling" problem our progress term targets. Reviewers will ask why ours beats theirs.
 - Downstream impact: one more pilot in Phase 5, one more ablation row in Phase 8.
-- Status: PROPOSED
-- Human decision:
+- Status: APPROVED
+- Human decision: "Approve both (Recommended)" — 2026-11-03 (selected answer to Phase 0 question)
 - Outcome:
 
 ## D-003 — Narrow novelty framing of claim 1
@@ -51,6 +51,6 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Proposed instead: keep claim, but add to PLAN.md §4 an "observation-only density rewards" group (IL-flOw, f-IRL, density reward modeling) and frame novelty as exact discrete machine state + AR transformer + byte-level interpretability, not likelihood-as-reward itself.
 - Reason: IL-flOw (NeurIPS 2021 workshop) already uses expert state-transition log-density as reward on low-dim states. No RAM-likelihood reward paper found.
 - Downstream impact: PLAN.md §4 edit; intro framing in Phase 10. Claims list unchanged.
-- Status: PROPOSED
-- Human decision:
+- Status: APPROVED
+- Human decision: "Proceed + approve D-003 (Recommended)" — 2026-11-03 (selected answer to Phase 0 question)
 - Outcome:
