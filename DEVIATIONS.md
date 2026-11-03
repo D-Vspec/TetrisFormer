@@ -109,3 +109,14 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Status: APPROVED
 - Human decision: "Pilot fixes, then rerun (Recommended)" — 2026-11-03
 - Outcome: pilot (a) chosen (entropy 0.05, β=0.5): no collapse, log p −39→−29. Pilot (b) collapsed to always-↓; stopped early.
+
+## D-009 — RL budget 300k steps per run; pilot (a) reused as "ours"
+- Date proposed: 2026-11-03
+- Phase / item: phases/poc.md P5 → "Same policy/PPO/budget as P2" (3M steps)
+- Checklist says: 3M steps per run.
+- Proposed instead: 300k steps for every run (ours, ours_nomask, curiosity, hand), all with the D-008 config (entropy 0.05, β=0.5). `runs/pilot_a` *is* the "ours" run (same config, same budget). No-mask and curiosity run in parallel.
+- Reason: human: report needed "in a couple hours"; learned-reward PPO runs at ~126 steps/s.
+- Downstream impact: 10× less training than planned. Results show early learning trends only; lines cleared will likely be ~0 for all.
+- Status: APPROVED
+- Human decision: "Do enough to get a proof of concept report in a couple hours" — 2026-11-03
+- Outcome:
