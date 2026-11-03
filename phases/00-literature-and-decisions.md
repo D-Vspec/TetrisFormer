@@ -6,24 +6,24 @@
 ## Checklist
 
 ### Novelty sweep
-- [ ] Semantic Scholar / Google Scholar / arXiv search: "RAM" + "reward model" + "transformer"
-- [ ] Search: "memory state" / "console RAM" + "learned reward" / "likelihood reward"
-- [ ] Search: papers citing VIPER (Escontrela et al., NeurIPS 2023) for non-pixel variants
-- [ ] Search: papers citing AtariARI and OCAtari that use RAM for *reward*, not just representation
-- [ ] Re-check Rank-Then-Act (arXiv 2607.01897) and PokeRL (arXiv 2604.10812) for follow-ups / code releases
-- [ ] Write findings to `notes/related-work.md`: each hit → one line on how it differs from us
+- [~] Semantic Scholar / Google Scholar / arXiv search: "RAM" + "reward model" + "transformer" — web search only, no hits (`notes/related-work.md`); a proper Semantic Scholar crawl is not done
+- [x] Search: "memory state" / "console RAM" + "learned reward" / "likelihood reward" — no hits; found IL-flOw / density-reward prior art
+- [~] Search: papers citing VIPER (Escontrela et al., NeurIPS 2023) for non-pixel variants — XIPER, Diffusion Reward found (both pixels); full citation list not crawled
+- [~] Search: papers citing AtariARI and OCAtari that use RAM for *reward*, not just representation — keyword search only, no hits
+- [x] Re-check Rank-Then-Act (arXiv 2607.01897) and PokeRL (arXiv 2604.10812) for follow-ups / code releases — both have code; RTA at ICML 2026 workshop
+- [x] Write findings to `notes/related-work.md`: each hit → one line on how it differs from us — commit 9899619
 - [ ] **Ask human:** does anything found kill or force a reframe of the novelty claim?
 
 ### Close reading
-- [ ] VIPER: reward definition, normalization, exploration term, model arch, data size; note code availability
-- [ ] Rank-Then-Act: games, metrics, reward definition, compute; note code availability
-- [ ] PokeRL: hand-designed reward terms (template for our Pokémon baseline)
-- [ ] Note any detail that contradicts PLAN.md §5 in `notes/related-work.md` (→ deviation if we change the plan)
+- [x] VIPER: reward definition, normalization, exploration term, model arch, data size; note code availability — `notes/related-work.md` §VIPER (from PDF)
+- [x] Rank-Then-Act: games, metrics, reward definition, compute; note code availability — `notes/related-work.md` §RTA (arXiv HTML)
+- [x] PokeRL: hand-designed reward terms (template for our Pokémon baseline) — from abstract + secondary summaries; re-verify in PDF in Phase 7
+- [x] Note any detail that contradicts PLAN.md §5 in `notes/related-work.md` (→ deviation if we change the plan) — D-001, D-002, D-003 proposed
 
 ### Citation verification
-- [ ] Burda et al. 2019 venue (ICLR) confirmed
-- [ ] IRIS, TWM, STORM venues confirmed
-- [ ] All §4 entries have full bibliographic info in `notes/refs.bib`
+- [x] Burda et al. 2019 venue (ICLR) confirmed
+- [x] IRIS, TWM, STORM venues confirmed — ICLR 2023 / ICLR 2023 / NeurIPS 2023
+- [~] All §4 entries have full bibliographic info in `notes/refs.bib` — all except Schmidhuber 1990/91; Reward Bag Transformer is TMLR 2025, not "2024"
 
 ### Decisions (PLAN.md §10) — human picks, Claude proposes
 - [ ] Target venue and deadline → write into this file
