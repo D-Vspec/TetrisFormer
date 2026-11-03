@@ -17,11 +17,11 @@ that beats random play. Single seed and rough numbers are fine. Replaces Phases 
 - [x] Volatile mask from no-op + random rollouts; saved; count recorded — 8 bytes (`notes/tetris_volatile.json`)
 
 ### P2 — Hand-engineered baseline
-- [ ] Tetris RAM addresses for lines / score / game over verified in the emulator (source cited)
-- [ ] Hand reward: lines cleared + small survival term (coefficients recorded)
-- [ ] MLP policy + critic on selected bytes (one-hot), PPO; config logged
-- [ ] Random-policy reference: lines and episode length
-- [ ] Train (1 seed, time budget recorded); evaluate vs random
+- [x] Tetris RAM addresses for lines / score / game over verified in the emulator (source cited) — PyBoy `GameWrapperTetris` (reads RAM internally); lines=0 under random play, game_over fires
+- [x] Hand reward: lines cleared + small survival term (coefficients recorded) — 1.0·Δlines + 0.01/step
+- [x] MLP policy + critic on selected bytes (one-hot), PPO; config logged — `ppo.py`, K=271 policy bytes, `runs/*/config.json`
+- [x] Random-policy reference: lines and episode length — 0.0 lines, 465 steps (48 eps)
+- [~] Train (1 seed, time budget recorded); evaluate vs random — smoke run 400k steps / ~6 min: 0 lines, pause hack (H-001)
 - [ ] **If the agent barely beats random → ask human** (e.g. scripted heuristic expert as data source instead)
 
 ### P3 — Expert data
