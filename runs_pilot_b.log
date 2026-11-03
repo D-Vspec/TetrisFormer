@@ -1,0 +1,7 @@
+UserWarning: Using SDL2 binaries from pysdl2-dll 2.32.10
+/home/dv/Documents/Programming/Projects/MarioFormer/ppo.py:104: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  "entropy": float(dist.entropy().mean()),
+{'step': 30720, 'sps': 133, 'rew_mean': -0.9850899577140808, 'ep_lines': 0.0, 'ep_len': 254.48, 'entropy': 0.5608379244804382, 'act_hist': [272, 273, 0, 991, 0, 0, 0, 0], 'raw_logp': -45.7681770324707}
+{'step': 61440, 'sps': 131, 'rew_mean': -1.3435254096984863, 'ep_lines': 0.0, 'ep_len': 60.76, 'entropy': 0.002969314344227314, 'act_hist': [0, 1536, 0, 0, 0, 0, 0, 0], 'raw_logp': -43.09999084472656}
+{'step': 92160, 'sps': 128, 'rew_mean': -1.0040162801742554, 'ep_lines': 0.0, 'ep_len': 104.7, 'entropy': 0.1855570375919342, 'act_hist': [3, 1138, 0, 395, 0, 0, 0, 0], 'raw_logp': -39.33741760253906}

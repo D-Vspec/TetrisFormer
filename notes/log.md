@@ -38,3 +38,5 @@ Entries before 2026-11-03 ~17:00 were reconstructed from the session after the h
 - **Stopped** `runs/hand` (entropy 0.01) at 1.58M steps (0.02 lines/ep, ~228-step episodes), to be superseded by the D-008 parity rerun. Its partial log is kept.
 - **Correction:** I first logged the hand-run stop at ~1.1M steps; the final log line shows 1,579,008. Fixed above and in D-008.
 - **Throughput discrepancy:** learned-reward PPO runs at ~126 steps/s end to end (pilot_a, nothing else running), not the ~200 estimated from reward-fn profiling (PPO update + env overhead on top). 3M-step run ≈ 6.6 h, not 4 h; 3 runs sequential ≈ 20 h.
+- **Pilots (D-008):** (a) entropy 0.05, β=0.5, 300k steps: no collapse (entropy ~1.0 throughout), raw log p −39 → −29/step, 0 lines, eval 0 lines / 159-step episodes. (b) entropy 0.05, β=2: collapsed to always-↓ (entropy 0.002) by 57k steps. Stopped (b) at ~110k steps, since it already met the "collapses" criterion. **Chose (a).**
+- **Surprise:** the larger RND weight made collapse *worse*, not better. Under β=2 the always-↓ policy presumably keeps producing fresh board states fast (short episodes → many resets).

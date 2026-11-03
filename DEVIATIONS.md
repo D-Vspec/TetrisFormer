@@ -108,4 +108,4 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Downstream impact: the P2 hand run (entropy 0.01, stopped at 1.58M steps) is superseded; all comparison rows use the new config.
 - Status: APPROVED
 - Human decision: "Pilot fixes, then rerun (Recommended)" — 2026-11-03
-- Outcome:
+- Outcome: pilot (a) chosen (entropy 0.05, β=0.5): no collapse, log p −39→−29. Pilot (b) collapsed to always-↓; stopped early.

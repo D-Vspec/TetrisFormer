@@ -1,0 +1,15 @@
+UserWarning: Using SDL2 binaries from pysdl2-dll 2.32.10
+/home/dv/Documents/Programming/Projects/MarioFormer/ppo.py:104: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  "entropy": float(dist.entropy().mean()),
+{'step': 30720, 'sps': 132, 'rew_mean': -0.16105769574642181, 'ep_lines': 0.0, 'ep_len': 300.1, 'entropy': 1.0482572317123413, 'act_hist': [494, 165, 129, 339, 366, 16, 0, 27], 'raw_logp': -45.780029296875}
+{'step': 61440, 'sps': 128, 'rew_mean': -0.20661495625972748, 'ep_lines': 0.02, 'ep_len': 292.82, 'entropy': 1.1153053045272827, 'act_hist': [549, 223, 124, 330, 203, 64, 0, 43], 'raw_logp': -42.64472961425781}
+{'step': 92160, 'sps': 128, 'rew_mean': -0.15969836711883545, 'ep_lines': 0.0, 'ep_len': 191.94, 'entropy': 1.072387456893921, 'act_hist': [217, 619, 83, 410, 73, 58, 0, 76], 'raw_logp': -41.50386047363281}
+{'step': 122880, 'sps': 128, 'rew_mean': -0.2284119427204132, 'ep_lines': 0.0, 'ep_len': 128.96, 'entropy': 1.1263893842697144, 'act_hist': [118, 816, 122, 103, 152, 61, 0, 164], 'raw_logp': -42.14647674560547}
+{'step': 153600, 'sps': 127, 'rew_mean': -0.21137124300003052, 'ep_lines': 0.0, 'ep_len': 102.24, 'entropy': 1.0715818405151367, 'act_hist': [50, 909, 26, 125, 199, 41, 6, 180], 'raw_logp': -39.03463363647461}
+{'step': 184320, 'sps': 127, 'rew_mean': -0.2117745280265808, 'ep_lines': 0.0, 'ep_len': 93.66, 'entropy': 0.9803462028503418, 'act_hist': [24, 859, 313, 27, 158, 28, 2, 125], 'raw_logp': -40.91162872314453}
+{'step': 215040, 'sps': 127, 'rew_mean': -0.14895056188106537, 'ep_lines': 0.02, 'ep_len': 153.56, 'entropy': 1.2435951232910156, 'act_hist': [148, 457, 171, 124, 110, 76, 4, 446], 'raw_logp': -35.534584045410156}
+{'step': 245760, 'sps': 127, 'rew_mean': -0.12396221607923508, 'ep_lines': 0.0, 'ep_len': 96.74, 'entropy': 1.0107700824737549, 'act_hist': [69, 858, 103, 223, 119, 136, 2, 26], 'raw_logp': -36.99018096923828}
+{'step': 276480, 'sps': 127, 'rew_mean': -0.02230643853545189, 'ep_lines': 0.0, 'ep_len': 167.86, 'entropy': 1.3039394617080688, 'act_hist': [262, 532, 109, 285, 80, 97, 4, 167], 'raw_logp': -35.51032257080078}
+eval {'lines': 0.0, 'len': 158.70833333333334, 'episodes': 24}
+reward model frozen: checksum unchanged
