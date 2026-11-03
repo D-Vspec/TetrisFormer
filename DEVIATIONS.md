@@ -59,9 +59,9 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Date proposed: 2026-11-03 (requested by human)
 - Phase / item: phases/00 → proposed 26-week timeline; all of Phases 1–10
 - Checklist says: 10 sequential phases toward NeurIPS 2027 (2027-05-03).
-- Proposed instead: PoC in ~2 days. Exact scope (game, phases kept/cut, data source) pending human answer below.
+- Proposed instead: PoC in ~2 days on **Tetris** (only usable ROM on disk). Scope: PyBoy env + volatile mask; short hand-engineered PPO baseline; expert data = top-k rollouts of that agent (D-001); ~1M reward model (Option B, T=8, K=128); PPO on likelihood + mask + RND; compare vs hand-engineered, random, curiosity (1 seed each); mask on/off; short results README. Cut: TAS, VIPER, extra games, other ablations, transfer, paper. Checklist: phases/poc.md.
 - Reason: human: "Change in timeline, I need it done in a couple days (doesn't have to be perfect just something as a Poc)"
 - Downstream impact: most of Phases 6–10 cut; multi-seed, ablations, VIPER, and extra games likely dropped; PoC results not paper-grade. Constraint found: no Super Mario Land ROM on this machine (only Tetris and Pokémon Yellow in ~/Documents/Programming/Projects/dvBoyC/roms/).
-- Status: PROPOSED (timeline change requested by human; scope awaiting approval)
-- Human decision: "Change in timeline, I need it done in a couple days (doesn't have to be perfect just something as a Poc)" — 2026-11-03
+- Status: APPROVED
+- Human decision: "Change in timeline, I need it done in a couple days (doesn't have to be perfect just something as a Poc)" — 2026-11-03; game: "Tetris (available now)"; scope: "Approve as proposed (Recommended)" — 2026-11-03
 - Outcome:

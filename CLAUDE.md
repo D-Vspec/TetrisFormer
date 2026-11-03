@@ -29,6 +29,8 @@ Full plan: `PLAN.md`. Work is driven by the phase checklists in `phases/`.
 
 ### Phase index
 
+> **Active: `phases/poc.md`** — 2-day Tetris PoC (D-004). Phases 1–10 below are paused.
+
 | # | Phase | File |
 |---|---|---|
 | 0 | Literature sweep & decisions | `phases/00-literature-and-decisions.md` |
