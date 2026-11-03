@@ -18,7 +18,7 @@
 - [ ] **Ask human:** official VIPER code vs reimplementation
 - [ ] Render frames for the *same* expert trajectories (pixels used only for this baseline — note in paper)
 - [ ] Video model trained to convergence on held-out frame NLL; size/compute recorded vs our model
-- [ ] Reward = frame likelihood (+ VIPER's own extras if their method includes them; recorded)
+- [ ] Reward = VIPER Eq. 6: frame log-likelihood + β·exploration bonus (RND, as in their paper); β recorded (D-002)
 - [ ] Policy still RAM-input
 - [ ] ≥3 seeds
 

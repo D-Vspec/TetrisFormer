@@ -25,6 +25,7 @@ Expect and document failure modes first, then fix with mask + progress term.
 - [ ] Implement candidate (a): novelty over auto-detected slow-changing bytes (no hand-named addresses); detection rule recorded
 - [ ] Implement candidate (b): likelihood improvement over a no-op continuation
 - [ ] Implement candidate (c): predicted temporal position within expert trajectories
+- [ ] Implement candidate (d): VIPER-style exploration bonus (RND on RAM input), r = log p + β·r_expl (D-002)
 - [ ] Short pilot of each (same seeds, same step budget) — results table below
 - [ ] **Ask human:** pick the main progress term (open decision §10); others become Phase 8 ablations
 - [ ] Coefficient for progress term vs likelihood recorded

@@ -134,7 +134,8 @@ Bytes are categorical (map ID 37 is not "more" than 36): embed, don't feed as sc
 - **Progress term:** counters the failure mode where idling in predictable states (menus, standing still) scores high likelihood. Candidates:
   - novelty over a small set of slow-changing bytes (map ID, level counter) without naming them by hand — e.g. auto-detected as bytes that change rarely in expert data;
   - reward for likelihood *improvement* over a no-op continuation;
-  - predicted temporal position within expert trajectories (how "far along" the state looks).
+  - predicted temporal position within expert trajectories (how "far along" the state looks);
+  - VIPER-style exploration bonus (RND), from VIPER's KL-matching derivation (D-002).
   Decide one; ablate the rest.
 
 ### 5.7 Policy
@@ -158,7 +159,7 @@ Bytes are categorical (map ID 37 is not "more" than 36): embed, don't feed as sc
 | Hand-engineered | RAM policy | Hand-coded RAM reward (PokeRL-style) |
 | **Ours** | RAM policy | Transformer likelihood (+ mask + progress) |
 | Curiosity | RAM policy | Transformer prediction error |
-| VIPER | RAM policy | Likelihood over rendered frames |
+| VIPER | RAM policy | Likelihood over rendered frames + β·exploration bonus (their Eq. 6) |
 | (opt.) Rank-Then-Act | RAM policy | Their progress reward |
 
 **Run the hand-engineered baseline first.** If it trains well, the RAM policy is not the bottleneck — this pre-empts the "RAM policies are weak" objection.

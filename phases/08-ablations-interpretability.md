@@ -8,7 +8,7 @@
 ### Ablations (same protocol, ≥3 seeds each)
 - [ ] **Ask human:** which games each ablation runs on
 - [ ] Mask vs no mask
-- [ ] No progress term vs each progress variant (a, b, c)
+- [ ] No progress term vs each progress variant (a, b, c, d)
 - [ ] Tokenization A (one token per step) vs B vs C (diff tokens) — implement A and C here
 - [ ] Context length T (e.g. 4 / 8 / 16)
 - [ ] Model size (1M / 5M / 25M)
