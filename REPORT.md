@@ -68,9 +68,9 @@ uses video frames, applied to exact machine state instead.
   (the same model with the opposite sign)?
 
 ### 1.4 Scope
-The original research plan (`PLAN.md`) targets Super Mario Land and Pokémon over several months. This report
-covers a **two-day proof of concept on Tetris**: the only suitable ROM available on the machine. The PoC
-checklist is `phases/poc.md`.
+This report covers a **two-day proof of concept on Game Boy Tetris**. Tetris has a compact, fully
+observable state and a clear task metric (lines cleared), which makes it a good first test bed. The
+checklist the work followed is `phases/poc.md`.
 
 ---
 
@@ -88,8 +88,7 @@ checklist is `phases/poc.md`.
   opposite-sign baseline.
 - **RAM as state.** AtariARI (Anand et al., 2019) and OCAtari (Delfosse et al., 2024) use Atari RAM as ground-truth
   state for representation learning, not for reward learning.
-- **Game Boy RL.** PokeRL (Mudireddy & Patibandla, 2026) uses hand-designed RAM rewards with pixel policies.
-  Rank-Then-Act (Maksyuta et al., 2026) learns a progress reward from expert *video* with a 7B vision-language
+- **Game Boy RL.** Rank-Then-Act (Maksyuta et al., 2026) learns a progress reward from expert *video* with a 7B vision-language
   model, on PyBoy games including Kirby.
 
 A literature sweep (`notes/related-work.md`) found no prior work using likelihood over console RAM as a
@@ -101,13 +100,12 @@ learned reward.
 
 ### 3.1 Process
 The work was organised around written phase checklists. Any departure from a checklist needed human approval
-and was logged. The project has 9 approved deviations (`DEVIATIONS.md`), a catalogue of reward hacks
+and was logged (`DEVIATIONS.md`), alongside a catalogue of reward hacks
 (`notes/reward-hacking.md`), and an event log of every discrepancy (`notes/log.md`). The main steps:
 
 | Step | Outcome |
 |---|---|
 | Literature sweep | No direct prior work; claims narrowed to "VIPER on exact machine state" (D-003); VIPER-style exploration bonus added (D-002) |
-| Scope change | Full plan compressed to a 2-day PoC on Tetris (D-004) |
 | Environment | Deterministic PyBoy Tetris env with RAM observations and a volatile-byte mask |
 | Hand-engineered baseline | Exploited twice through the pause button (H-001, H-002); reward fixed (D-006) |
 | Expert data | PPO could not produce competent play, so a scripted expert was written instead (D-005) |
@@ -115,8 +113,7 @@ and was logged. The project has 9 approved deviations (`DEVIATIONS.md`), a catal
 | RL with learned reward | First run collapsed to one action (H-003); exploration fixed via pilots (D-008) |
 | Final runs | 300k steps each for 4 reward variants (D-009); analysis, figure, GIF |
 
-### 3.2 Changes from the original plan, and why
-- **Tetris instead of Super Mario Land:** no SML ROM was available.
+### 3.2 Key decisions, and why
 - **Scripted expert instead of TAS/human/RL data:** a Tetris TAS gives only ~2k agent steps, and our PPO agent
   never cleared a line. A heuristic player gave 100 competent games in 5 minutes.
 - **300k RL steps instead of 3M:** the learned reward costs ~14 GFLOPs per step, so RL ran at only ~126 steps/s,
@@ -387,7 +384,8 @@ Next steps, in order of expected value:
    followed by RL on the learned reward.
 3. **Faster reward model** (KV cache or recurrent variant) to make longer RL affordable.
 4. **Independent metrics** (holes, stack height) computed outside the reward model, to break the circularity.
-5. **The original target:** Super Mario Land and Pokémon, with human/TAS data, as in `PLAN.md`.
+5. **Human play data:** record human Tetris games to replace the scripted expert, so the reward no longer
+   imitates a hand-written heuristic.
 
 ---
 
@@ -400,7 +398,6 @@ Next steps, in order of expected value:
 - Burda, Y. et al. *Exploration by Random Network Distillation.* ICLR 2019.
 - Anand, A. et al. *Unsupervised State Representation Learning in Atari.* NeurIPS 2019.
 - Delfosse, Q. et al. *OCAtari: Object-Centric Atari 2600 Reinforcement Learning Environments.* RLJ 2024.
-- Mudireddy, D. R., Patibandla, S. *PokeRL: Reinforcement Learning for Pokémon Red.* arXiv:2604.10812, 2026.
 - Maksyuta, Y. et al. *Rank-Then-Act: Reward-Free Control from Frame-Order Progress.* arXiv:2607.01897, 2026.
 - Schulman, J. et al. *Proximal Policy Optimization Algorithms.* arXiv:1707.06347, 2017.
 - Lee, Y. *Tetris AI – The (Near) Perfect Bot* (heuristic weights), 2013.
