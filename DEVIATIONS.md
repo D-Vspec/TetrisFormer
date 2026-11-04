@@ -120,3 +120,14 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Status: APPROVED
 - Human decision: "Do enough to get a proof of concept report in a couple hours" — 2026-11-03
 - Outcome: all runs done; every agent ~0 lines; see RESULTS.md.
+
+## D-010 — All proposed 3M-step runs (reverts D-009 budget, adds seeds)
+- Date proposed: 2026-11-04
+- Phase / item: phases/poc.md P2/P5 → "Same policy/PPO/budget" (3M steps, 1 seed); REPORT.md §7 next step 1 (3M+, 3 seeds, ours vs hand)
+- Checklist says: 3M steps, 1 seed per run. D-009 had cut this to 300k.
+- Proposed instead: run every proposed 3M run, D-008 config (entropy 0.05, β=0.5): ours ×3 seeds, hand ×3 seeds, no-mask ×1, curiosity ×1 (`run_3m.sh`, 3 jobs in parallel). New run names `*_3m_s{seed}`; the 300k runs are kept. `ppo.py` now also saves `policy.pt` every 100 updates (crash insurance; does not touch RNG or training).
+- Reason: human request.
+- Downstream impact: ~1 day of compute. Seeds 1–2 are extra scope beyond the checklist's 1 seed.
+- Status: APPROVED
+- Human decision: "Do it with all the proposed 3M runs" — 2026-11-04
+- Outcome: (pending)

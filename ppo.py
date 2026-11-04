@@ -106,6 +106,7 @@ def train(args, reward_fn=None, run_hook=None):
         if run_hook: rec |= run_hook()
         log.write(json.dumps(rec) + "\n"); log.flush()
         if (step // (N * S)) % 20 == 0: print(rec, flush=True)
+        if (step // (N * S)) % 100 == 0: torch.save(pol.state_dict(), f"{out}/policy.pt")  # crash insurance for 3M runs
     env.close()
     torch.save(pol.state_dict(), f"{out}/policy.pt")
     res = evaluate(pol)
