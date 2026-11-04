@@ -89,6 +89,7 @@ def train(args, reward_fn=None, run_hook=None):
             adv[t] = last
         ret = adv + b["val"]
         flat = {k: v.reshape(N * S, *v.shape[2:]) for k, v in b.items()} | {"adv": adv.flatten(), "ret": ret.flatten()}
+        kl_stops = 0
         for _ in range(args.epochs):
             for idx in torch.randperm(N * S, device=DEV).split(N * S // args.minibatches):
                 dist, v = pol(flat["obs"][idx])
@@ -98,10 +99,12 @@ def train(args, reward_fn=None, run_hook=None):
                 pl = -torch.min(ratio * a_, ratio.clamp(1 - args.clip, 1 + args.clip) * a_).mean()
                 loss = pl + 0.5 * (v - flat["ret"][idx]).pow(2).mean() - args.ent * dist.entropy().mean()
                 opt.zero_grad(); loss.backward(); nn.utils.clip_grad_norm_(pol.parameters(), 0.5); opt.step()
+                with torch.no_grad(): kl = ((ratio - 1) - (lp - flat["logp"][idx])).mean().item()  # approx KL
+            if args.target_kl and kl > args.target_kl: kl_stops = 1; break  # D-011: guard against destructive updates
         rec = {"step": step, "sps": int(step / (time.time() - t0)), "rew_mean": float(b["rew"].mean()),
                "ep_lines": float(np.mean(ep_lines[-50:])) if ep_lines else None,
                "ep_len": float(np.mean(ep_lens[-50:])) if ep_lens else None,
-               "entropy": float(dist.entropy().mean()),
+               "entropy": float(dist.entropy().mean()), "kl": kl, "kl_stop": kl_stops,
                "act_hist": np.bincount(flat["act"].cpu().numpy(), minlength=8).tolist()}
         if run_hook: rec |= run_hook()
         log.write(json.dumps(rec) + "\n"); log.flush()
@@ -128,6 +131,7 @@ def parser():
     p.add_argument("--minibatches", type=int, default=8)
     p.add_argument("--ent", type=float, default=0.01)
     p.add_argument("--seed", type=int, default=0)
+    p.add_argument("--target_kl", type=float, default=0.02)  # D-011; 0 = off (all runs before D-011)
     return p
 
 

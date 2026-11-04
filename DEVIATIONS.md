@@ -131,3 +131,14 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Status: APPROVED
 - Human decision: "Do it with all the proposed 3M runs" — 2026-11-04
 - Outcome: (pending)
+
+## D-011 — PPO KL early-stop; restart ours_3m_s0
+- Date proposed: 2026-11-04
+- Phase / item: D-010 runs; PPO config (D-008)
+- Checklist says: identical PPO config for every run (entropy 0.05, no KL guard).
+- Proposed instead: add an approximate-KL early stop (CleanRL style: skip the remaining epochs of an update once KL > 0.02), on by default in `ppo.py`. Restart ours_3m_s0 with it (the collapsed run is kept as `runs/ours_3m_s0_nokl`). Every D-010 run not yet started (no-mask, curiosity, hand ×3) gets it automatically.
+- Reason: ours_3m_s0 collapsed to always-→ at ~722k steps (entropy 1.1→0 in 2 updates while its reward fell); see notes/log.md.
+- Downstream impact: **ours s1 and s2 were already running without the guard and continue without it.** So the ours seeds don't share an identical config; report this. Restarting s0 costs ~8 h of compute, as a 4th parallel job.
+- Status: APPROVED
+- Human decision: "Yes do that" (to: restart seed 0 with a KL early-stop / lower lr guard, put the guard in every run not yet started) — 2026-11-04
+- Outcome: (pending)
