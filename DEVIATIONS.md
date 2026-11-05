@@ -142,3 +142,14 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Status: APPROVED
 - Human decision: "Yes do that" (to: restart seed 0 with a KL early-stop / lower lr guard, put the guard in every run not yet started) — 2026-11-04
 - Outcome: guarded ours s0 didn't collapse in 3M; guarded no-mask still collapsed (partial at 1.40M, full at 1.65–1.82M). The guard can't pull out a policy that has already collapsed (KL ≈ 0). No-guard collapses: 2/3; guarded: 1/2. REPORT.md §5.4.
+
+## D-012 — Placement-level action space (new experiment after the PoC)
+- Date proposed: 2026-11-05
+- Phase / item: beyond phases/poc.md (new experiment); PLAN.md action space = buttons
+- Checklist says: 8 button actions (↑ ↓ ← → A B Start, no-op), frame-skip 24.
+- Proposed instead: 40 placement actions (rotation × column). A placement is executed by the scripted expert's closed-loop executor through the unchanged `env.step` (button presses, 24-frame steps) until the piece locks (cap 60 steps). Learned reward per placement = **mean** log p over its button steps (a sum would favour high stacks: fewer fall frames → fewer negative terms) + β·RND on the post-placement state. Hand reward unchanged (lines + 0.1/piece). Same reward model, same policy MLP (40-way head), same PPO config + KL guard. Runs: ours vs hand; budget set after measuring throughput (target ~1M placements).
+- Reason: the 3M runs showed button-level exploration is the bottleneck (REPORT §6.3); the human wants the agents to be better at Tetris.
+- Downstream impact: the action space now encodes Tetris knowledge (piece/rotation/column, and the executor reads the screen), which weakens the "no game-specific engineering" claim. Report results separately from the button-level runs.
+- Status: APPROVED
+- Human decision: "I want the models to be better at tetris, what all can i do" → (options; #1 recommended) → "Lets try one" — 2026-11-05
+- Outcome: (pending)
