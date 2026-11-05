@@ -1,0 +1,16 @@
+{
+ "name": "hand_3m_s0",
+ "steps": 3000000,
+ "envs": 12,
+ "rollout": 128,
+ "lr": 0.00025,
+ "gamma": 0.99,
+ "lam": 0.95,
+ "clip": 0.2,
+ "epochs": 4,
+ "minibatches": 8,
+ "ent": 0.05,
+ "seed": 0,
+ "target_kl": 0.02,
+ "commit": "500e1f5"
+}

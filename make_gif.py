@@ -1,5 +1,6 @@
 """Side-by-side GIF: scripted expert | ours (likelihood reward) | curiosity. Same dynamics as TetrisEnv.step
 (one button press, then 24 frames), but rendered and captured every 8 frames."""
+import sys
 import numpy as np, torch
 from PIL import Image, ImageDraw
 from env import ACTIONS, TetrisEnv
@@ -30,7 +31,8 @@ def frames(kind, timer_div=42):
     return out
 
 
-panels = [("expert", "Scripted expert"), ("pilot_a", "Ours (likelihood)"), ("curiosity", "Curiosity")]
+M3 = sys.argv[1:] == ["3m"]  # D-010: 3M-step policies
+panels = [("expert", "Scripted expert"), ("ours_3m_s0" if M3 else "pilot_a", "Ours (likelihood)"), ("curiosity_3m_s0" if M3 else "curiosity", "Curiosity")]
 cols = [frames(k) for k, _ in panels]
 W, H, PAD, TOP = 160, 144, 8, 18
 gif = []
@@ -40,5 +42,5 @@ for i in range(len(cols[0])):
     for j, (col, (_, label)) in enumerate(zip(cols, panels)):
         x = PAD + j * (W + PAD); canvas.paste(col[i], (x, TOP)); d.text((x, 3), label, fill=(230, 230, 230))
     gif.append(canvas.resize((canvas.width * 2, canvas.height * 2), Image.NEAREST))
-gif[0].save("runs/tetris_agents.gif", save_all=True, append_images=gif[1:], duration=CAP * 1000 // 60, loop=0, optimize=True)
+gif[0].save("runs/tetris_agents_3m.gif" if M3 else "runs/tetris_agents.gif", save_all=True, append_images=gif[1:], duration=CAP * 1000 // 60, loop=0, optimize=True)
 print(len(gif), "frames")
