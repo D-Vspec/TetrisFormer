@@ -58,6 +58,11 @@ uv venv --system-site-packages .venv && uv pip install --python .venv/bin/python
 .venv/bin/python rm.py --name rm_nomask --nomask
 .venv/bin/python rl.py --name ours --ent 0.05 --beta 0.5 --steps 300000
 .venv/bin/python analyze.py
+
+# 3M-step runs (~23 h on one laptop): ours ×3 seeds, hand ×3, no-mask, curiosity
+sh run_3m.sh
+.venv/bin/python analyze.py runs/analysis_3m.json ours_3m_s0 ours_3m_s1 ours_3m_s2 nomask_3m_s0 curiosity_3m_s0 hand_3m_s0 hand_3m_s1 hand_3m_s2
+.venv/bin/python plot_training.py 3m && .venv/bin/python make_gif.py 3m
 ```
 
 Note: `env.py` writes the volatile mask, but the policy address set (`data/policy_addresses.npy`) was built by an
