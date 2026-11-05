@@ -1,12 +1,13 @@
 """PoC P6: results table + per-address reward attribution (mean log p per byte) on expert / random / agent traces."""
-import glob, json, os
+import glob, json, os, sys
 import numpy as np
 import torch, torch.nn.functional as F
 from env import TetrisEnv
 from ppo import DEV, Policy, policy_addresses
 from rm import RewardModel, load
 
-RUNS = ["hand_final", "pilot_a", "ours_nomask", "curiosity"]  # pilot_a = "ours" (D-009)
+RUNS = sys.argv[2:] or ["hand_final", "pilot_a", "ours_nomask", "curiosity"]  # pilot_a = "ours" (D-009)
+OUT = sys.argv[1] if len(sys.argv) > 1 else "runs/analysis.json"  # D-010: `analyze.py runs/analysis_3m.json <runs...>`
 
 
 def agent_traces(run, episodes=8):
@@ -56,5 +57,5 @@ if __name__ == "__main__":
         gap = lp["expert_val"] - v  # where this policy's states are least expert-like
         top = np.argsort(-gap)[:10]
         report["top_addresses"][k] = [(hex(0xC000 + int(addrs[i])), round(float(gap[i]), 3)) for i in top]
-    json.dump(report, open("runs/analysis.json", "w"), indent=1)
+    json.dump(report, open(OUT, "w"), indent=1)
     print(json.dumps(report, indent=1))
