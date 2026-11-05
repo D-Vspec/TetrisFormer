@@ -31,13 +31,13 @@ def hand_reward(infos):
     return np.array([1.0 * i["dlines"] + 0.1 * i["dpieces"] for i in infos], dtype=np.float32)  # D-006
 
 
-def evaluate(policy, episodes=24, n_envs=12, seed=999):
+def evaluate(policy, episodes=24, n_envs=12, seed=999, placement=False):
     """Sampled-action eval; policy=None -> uniform random."""
-    env, done_eps = VecEnv(n_envs, seed=seed), []
+    env, done_eps = VecEnv(n_envs, seed=seed, placement=placement), []
     obs = env.reset()
     while len(done_eps) < episodes:
         if policy is None:
-            a = np.random.randint(8, size=n_envs)
+            a = np.random.randint(40 if placement else 8, size=n_envs)
         else:
             with torch.no_grad():
                 a = policy(torch.as_tensor(obs, device=DEV))[0].sample().cpu().numpy()
@@ -54,8 +54,8 @@ def train(args, reward_fn=None, run_hook=None):
     json.dump(vars(args) | {"commit": commit}, open(f"{out}/config.json", "w"), indent=1)
     log = open(f"{out}/log.jsonl", "w")
 
-    env = VecEnv(args.envs, seed=args.seed)
-    pol = Policy(policy_addresses()).to(DEV)
+    env = VecEnv(args.envs, seed=args.seed, placement=args.placement)
+    pol = Policy(policy_addresses(), n_act=40 if args.placement else 8).to(DEV)
     opt = torch.optim.Adam(pol.parameters(), lr=args.lr, eps=1e-5)
     N, S = args.envs, args.rollout
     obs = env.reset()
@@ -105,14 +105,14 @@ def train(args, reward_fn=None, run_hook=None):
                "ep_lines": float(np.mean(ep_lines[-50:])) if ep_lines else None,
                "ep_len": float(np.mean(ep_lens[-50:])) if ep_lens else None,
                "entropy": float(dist.entropy().mean()), "kl": kl, "kl_stop": kl_stops,
-               "act_hist": np.bincount(flat["act"].cpu().numpy(), minlength=8).tolist()}
+               "act_hist": np.bincount(flat["act"].cpu().numpy(), minlength=40 if args.placement else 8).tolist()}
         if run_hook: rec |= run_hook()
         log.write(json.dumps(rec) + "\n"); log.flush()
         if (step // (N * S)) % 20 == 0: print(rec, flush=True)
         if (step // (N * S)) % 100 == 0: torch.save(pol.state_dict(), f"{out}/policy.pt")  # crash insurance for 3M runs
     env.close()
     torch.save(pol.state_dict(), f"{out}/policy.pt")
-    res = evaluate(pol)
+    res = evaluate(pol, placement=args.placement)
     json.dump(res, open(f"{out}/eval.json", "w")); print("eval", res)
     return pol
 
@@ -131,6 +131,7 @@ def parser():
     p.add_argument("--minibatches", type=int, default=8)
     p.add_argument("--ent", type=float, default=0.01)
     p.add_argument("--seed", type=int, default=0)
+    p.add_argument("--placement", action="store_true")  # D-012: 40 placement actions
     p.add_argument("--target_kl", type=float, default=0.02)  # D-011; 0 = off (all runs before D-011)
     return p
 

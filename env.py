@@ -43,14 +43,19 @@ class TetrisEnv:
         return self.ram(), done, info
 
 
-def _worker(conn, seed):
+def _worker(conn, seed, placement=False):
     env = TetrisEnv(seed)
+    if placement:
+        from expert import place  # D-012 (expert imports env, so import here)
     while True:
         cmd, arg = conn.recv()
         if cmd == "reset":
             conn.send(env.reset(arg))
         elif cmd == "step":
-            obs, done, info = env.step(arg)
+            if placement:
+                obs, done, info, info["subs"] = place(env, arg)
+            else:
+                obs, done, info = env.step(arg)
             if done:
                 info["final_t"], obs = env.t, env.reset()  # auto-reset
             conn.send((obs, done, info))
@@ -59,12 +64,12 @@ def _worker(conn, seed):
 
 
 class VecEnv:
-    def __init__(self, n, seed=0):
+    def __init__(self, n, seed=0, placement=False):
         ctx = mp.get_context("fork")
         self.conns, self.procs = [], []
         for i in range(n):
             a, b = ctx.Pipe()
-            p = ctx.Process(target=_worker, args=(b, seed * 1000 + i), daemon=True)
+            p = ctx.Process(target=_worker, args=(b, seed * 1000 + i, placement), daemon=True)
             p.start()
             self.conns.append(a); self.procs.append(p)
         self.n = n

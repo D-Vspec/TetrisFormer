@@ -45,7 +45,34 @@ class LearnedReward:
         self.rnd = RND(policy_addresses()).to(DEV) if beta > 0 else None
         self.raw = []
 
+    def placement(self, obs, done, infos):
+        """D-012: per-env MEAN log p over the button steps of one placement, all windows in one batch."""
+        wins, owner = [], []
+        for i, inf in enumerate(infos):
+            seq = torch.cat([self.hist[i], torch.as_tensor(inf["subs"], device=DEV)[:, self.addrs]])  # [T+L, K]
+            wins.append(seq.unfold(0, self.T + 1, 1).permute(0, 2, 1))  # [L, T+1, K]
+            owner += [i] * (len(seq) - self.T)
+            self.hist[i] = seq[-self.T:]
+        w, owner = torch.cat(wins), torch.as_tensor(owner, device=DEV)
+        with torch.autocast("cuda", torch.bfloat16):
+            lp = self.m.logp_next(w[:, :self.T], w[:, self.T]).sum(-1).float()
+        n = len(infos)
+        return (torch.zeros(n, device=DEV).index_add_(0, owner, lp) / torch.bincount(owner, minlength=n)).cpu().numpy()
+
     def __call__(self, prev, obs, done, infos):
+        if "subs" in infos[0]:  # placement actions (D-012)
+            if self.hist is None:
+                self.hist = torch.as_tensor(prev, device=DEV)[:, self.addrs][:, None].repeat(1, self.T, 1)
+            lp = self.placement(obs, done, infos)
+            self.raw.append(lp[~done].mean() if (~done).any() else np.nan)
+            r = self.norm(self.sign * lp)
+            if self.rnd is not None:
+                r = r + self.beta * self.rnorm(self.rnd.bonus(torch.as_tensor(obs, device=DEV)))
+            r[done] = 0.0
+            nxt = torch.as_tensor(obs, device=DEV)[:, self.addrs]
+            d = torch.as_tensor(done, device=DEV)
+            self.hist[d] = nxt[d][:, None].repeat(1, self.T, 1)  # new episode: pad history with first state
+            return r.astype(np.float32)
         prev = torch.as_tensor(prev, device=DEV)[:, self.addrs]
         nxt_full = torch.as_tensor(obs, device=DEV)
         nxt = nxt_full[:, self.addrs]

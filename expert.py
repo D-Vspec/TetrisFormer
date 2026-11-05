@@ -81,6 +81,34 @@ class Expert:
         return LEFT if c > col else RIGHT if c < col else DOWN
 
 
+def place(env, a, cap=60):
+    """D-012: one placement action a in [0, 40) = (rotation a//10, column a%10), executed with the expert's
+    closed-loop buttons until the piece locks. Returns (obs, done, info, button-step RAM states)."""
+    subs, dlines, done, info = [], 0, False, {}
+
+    def step(b):
+        nonlocal done, dlines, info
+        obs, done, info = env.step(b); subs.append(obs); dlines += info["dlines"]
+
+    def spawn():  # wait until a piece is falling, so obs shows the piece to place
+        while not screen(env)[1].any() and not done and len(subs) < 2 * cap: step(NOOP)
+
+    spawn(); board, falling = screen(env)
+    if falling.any() and not done:
+        shapes = rotations(norm(np.argwhere(falling)))
+        shape = shapes[(a // 10) % len(shapes)]
+        col = min(a % 10, 10 - (max(c for _, c in shape) + 1))
+        n0 = int(board.sum())
+        while not done and len(subs) < cap:
+            board, falling = screen(env)
+            if int(board.sum()) != n0: break  # locked (or lines cleared)
+            if not falling.any(): step(NOOP); continue
+            cells = np.argwhere(falling); c = cells[:, 1].min()
+            step(A if norm(cells) != shape else LEFT if c > col else RIGHT if c < col else DOWN)
+        spawn()
+    return subs[-1], done, info | {"dlines": dlines, "dpieces": 1}, np.stack(subs)
+
+
 def rollout(timer_div, record=True):
     env = TetrisEnv(); obs = env.reset(timer_div=timer_div); ex = Expert(env)
     trace, done = [obs], False
@@ -95,3 +123,12 @@ if __name__ == "__main__":
     for td in range(3):
         t = time.time(); tr, info = rollout(td, record=False)
         print(f"timer_div={td} lines={info['lines']} steps={info['t']} over={info['t'] < 2000} ({time.time() - t:.1f}s)")
+    # D-012 check: the expert's own choices, sent as placement actions through place(), must clear lines
+    env = TetrisEnv(); env.reset(timer_div=0); done, n, t = False, 0, time.time()
+    while not done:
+        board, falling = screen(env)
+        best = plan(board, falling) if falling.any() else None
+        a = 0 if best is None else rotations(norm(np.argwhere(falling))).index(best[0]) * 10 + best[1]
+        _, done, info, subs = place(env, a); n += 1
+    print(f"placement API: {n} placements, lines={info['lines']}, steps={info['t']} ({time.time() - t:.1f}s)")
+    assert info["lines"] > 10, "place() fails to execute expert placements"
