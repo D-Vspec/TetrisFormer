@@ -17,6 +17,25 @@
 - ⚠️ **The comparison is mostly circular.** "Ours scores best under the reward model" is partly by construction.
   The only independent metric (lines) shows no difference.
 
+## Update: 3M-step runs (D-010, D-011), 2026-11-05
+8 runs × 3M steps (~23 h): ours ×3 seeds, hand ×3, no-mask, curiosity. Data: `runs/analysis_3m.json`, figure
+`runs/fig_training_3m.png`, GIF `runs/tetris_agents_3m.gif`. The 300k tables below are the pilot.
+
+| Run | Seeds | Lines/game | Ep. length | log p mean | **median** | Main behaviour |
+|---|---|---|---|---|---|---|
+| Ours | 3 | 0.04 · 0.0 · 0.08 | 224 | −40 (−31…−52) | **−16** (−12…−21) | ↓ 25–32% |
+| Hand | 3 | 0 · 0 · 0 | 275 | −93 | −40 (−36…−46) | near-uniform (entropy 1.6) |
+| No mask | 1 | 0.0 | 241 | −30 | −16 | ↓ 29%, ← 19% |
+| Curiosity | 1 | 0.0 | 314 | −239 | −173 | Start 94% |
+
+- **Still no lines** in any run. 10× more training didn't change the independent metric.
+- **Ours > hand on log p on every seed** (worst ours −21 vs best hand −36). Still circular.
+- **The reward plateaued by ~300k** (training log p −34…−40 at 300k, −32…−36 at 3M).
+- **The no-mask finding from 300k didn't replicate:** at 3M it scores like ours, with gaps on piece sprites,
+  not sound bytes.
+- **Collapses came back at 3M despite entropy 0.05:** 2/3 no-guard runs collapsed; with the KL guard, ours s0 was
+  fine but no-mask still collapsed (it can't undo a collapse). Only ours s0 used the guard.
+
 ## Setup
 | Component | What |
 |---|---|
@@ -98,7 +117,7 @@ volatile bytes", sprites for "paused".
 7. **0xC203's meaning** is unidentified.
 
 ## What I'd do next (in order)
-1. Run ours vs hand for 3M+ steps, 3 seeds: does lines-cleared separate at all?
+1. ~~Run ours vs hand for 3M+ steps, 3 seeds~~: done (D-010). Lines don't separate.
 2. Behaviour-clone warm-start or a coarser action space (placement-level). Button-level PPO is the bottleneck,
    not the reward.
 3. An independent metric beyond lines: e.g. holes/height on the board, computed outside the reward model.

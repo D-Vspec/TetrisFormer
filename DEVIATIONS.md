@@ -130,7 +130,7 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Downstream impact: ~1 day of compute. Seeds 1–2 are extra scope beyond the checklist's 1 seed.
 - Status: APPROVED
 - Human decision: "Do it with all the proposed 3M runs" — 2026-11-04
-- Outcome: (pending)
+- Outcome: all 8 runs done by 2026-11-05 06:05 (~23 h). Every agent ≤0.08 lines/game; ours > hand on log p on all seeds; ours' reward plateaued by ~300k. `runs/analysis_3m.json`, REPORT.md §5.
 
 ## D-011 — PPO KL early-stop; restart ours_3m_s0
 - Date proposed: 2026-11-04
@@ -141,4 +141,4 @@ Newest at the bottom. IDs are never reused. Only a human can approve; quote them
 - Downstream impact: **ours s1 and s2 were already running without the guard and continue without it.** So the ours seeds don't share an identical config; report this. Restarting s0 costs ~8 h of compute, as a 4th parallel job.
 - Status: APPROVED
 - Human decision: "Yes do that" (to: restart seed 0 with a KL early-stop / lower lr guard, put the guard in every run not yet started) — 2026-11-04
-- Outcome: (pending)
+- Outcome: guarded ours s0 didn't collapse in 3M; guarded no-mask still collapsed (partial at 1.40M, full at 1.65–1.82M). The guard can't pull out a policy that has already collapsed (KL ≈ 0). No-guard collapses: 2/3; guarded: 1/2. REPORT.md §5.4.

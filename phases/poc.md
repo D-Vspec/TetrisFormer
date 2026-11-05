@@ -54,3 +54,4 @@ that beats random play. Single seed and rough numbers are fine. Replaces Phases 
 ## Notes / decisions
 - P1 mask rule: no byte changes on ≥95% of steps at 24-frame sampling (frame counter / RNG live in HRAM/IO, not WRAM). Used **no-op change rate ≥ 0.6** instead → 7 sound-driver bytes (0xDF94–0xDFC4) + stack byte 0xCFED. Random-play rates not thresholded because Start pauses Tetris and halves the rates. Only 278/8192 WRAM bytes ever change in play.
 - P5: curiosity run keeps the RND bonus (β=0.5) so it differs from "ours" only in the sign of log p.
+- D-010/D-011 (2026-11-04/05): all proposed 3M runs done — ours ×3, hand ×3, no-mask, curiosity (`runs/*_3m_s*`, `runs/analysis_3m.json`). KL early stop added mid-experiment; ours s1/s2 ran without it. REPORT.md, RESULTS.md and README updated to 3M.
