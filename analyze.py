@@ -11,14 +11,25 @@ OUT = sys.argv[1] if len(sys.argv) > 1 else "runs/analysis.json"  # D-010: `anal
 
 
 def agent_traces(run, episodes=8):
-    pol = Policy(policy_addresses()).to(DEV); pol.load_state_dict(torch.load(f"runs/{run}/policy.pt")); pol.eval()
-    out = []
+    """Button-step RAM traces. D-012: a 40-way head = placement policy (traces = every button step of each
+    placement); run "random_place" = uniform random placements."""
+    if run == "random_place":
+        pol, place_mode = None, True
+    else:
+        sd = torch.load(f"runs/{run}/policy.pt"); place_mode = sd["pi.weight"].shape[0] == 40
+        pol = Policy(policy_addresses(), n_act=40 if place_mode else 8).to(DEV); pol.load_state_dict(sd); pol.eval()
+    if place_mode: from expert import place
+    rng, out = np.random.default_rng(0), []
     for ep in range(episodes):
         env = TetrisEnv(seed=ep); obs = env.reset(timer_div=200 + ep); tr, done = [obs], False
         while not done:
-            with torch.no_grad():
-                a = pol(torch.as_tensor(obs[None], device=DEV))[0].sample().item()
-            obs, done, _ = env.step(a); tr.append(obs)
+            if pol is None: a = int(rng.integers(40))
+            else:
+                with torch.no_grad(): a = pol(torch.as_tensor(obs[None], device=DEV))[0].sample().item()
+            if place_mode:
+                obs, done, _, subs = place(env, a); tr += list(subs)
+            else:
+                obs, done, _ = env.step(a); tr.append(obs)
         out.append(np.stack(tr))
     return out
 
@@ -45,6 +56,9 @@ if __name__ == "__main__":
     addrs, T = ck["addrs"], ck["T"]
     rand_eval = json.load(open("runs/random_eval.json")) if os.path.exists("runs/random_eval.json") else None
     rows = [("random", rand_eval)] + [(r, json.load(open(f"runs/{r}/eval.json"))) for r in RUNS if os.path.exists(f"runs/{r}/eval.json")]
+    if "random_place" in RUNS:  # D-012 baseline: same eval as training's final eval, uniform placements
+        from ppo import evaluate
+        rows.append(("random_place", evaluate(None, placement=True)))
     sets = {"expert_val": load("expert", addrs, list(range(0, 100, 10))), "random": load("random", addrs)}
     for r, _ in rows[1:]:
         sets[r] = [e[:, addrs] for e in agent_traces(r)]
