@@ -11,8 +11,8 @@ MAX_STEPS = 2000
 
 
 class TetrisEnv:
-    def __init__(self, seed=0):
-        self.pb = PyBoy(ROM, window="null", sound_emulated=False)
+    def __init__(self, seed=0, window="null"):
+        self.pb = PyBoy(ROM, window=window, sound_emulated=False)
         self.pb.set_emulation_speed(0)
         self.w = self.pb.game_wrapper
         self.rng = np.random.default_rng(seed)
